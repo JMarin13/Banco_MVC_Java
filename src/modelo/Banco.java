@@ -15,11 +15,13 @@ public class Banco {
     private String nit;
     private String nombre;
     private ArrayList<Cuenta> lstCuentas;
+    private ArrayList<Cliente> lstClientes;
 
     public Banco() {
         this.nit = "123456789-01";
         this.nombre = "Banco U. Caldas";
         this.lstCuentas = new ArrayList<>();
+        this.lstClientes = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -45,5 +47,15 @@ public class Banco {
     public void setLstCuentas(ArrayList<Cuenta> lstCuentas) {
         this.lstCuentas = lstCuentas;
     }
+
+    public ArrayList<Cliente> getLstClientes() {
+        return lstClientes;
+    }
+
+    public void setLstClientes(ArrayList<Cliente> lstClientes) {
+        this.lstClientes = lstClientes;
+    }
+    
+    
     
 }

@@ -4,13 +4,18 @@
  */
 package vista;
 
+import controlador.*;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
+import modelo.*;
 
 /**
  *
  * @author jmari
  */
 public class frmPrincipal extends javax.swing.JFrame {
+    
+    ControladorBanco banco;
 
     /**
      * Creates new form frmPrincipal
@@ -19,6 +24,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         llenarCombos();
+        banco = new ControladorBanco();
     }
 
     /**
@@ -89,6 +95,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         cbxTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Persona Natural", "Persona Jurídica" }));
 
         btnCrearCliente.setText("Crear");
+        btnCrearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearClienteActionPerformed(evt);
+            }
+        });
 
         btnBuscarCliente.setText("Buscar");
 
@@ -249,6 +260,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
+        // TODO add your handling code here:
+        crearCliente();
+    }//GEN-LAST:event_btnCrearClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -331,5 +347,40 @@ public class frmPrincipal extends javax.swing.JFrame {
         for (int i = LocalDate.now().getYear(); i >= 1940; i--) {
             cbxAnioNacimientoCliente.addItem(i + "");
         }
+    }
+
+    private void crearCliente() {
+        
+        if (txtDocumentoCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El documento es obligatorio");
+        } else if (txtNombreCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El nombre es obligatorio");
+        } else if (txtCorreoCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El correo es obligatorio");
+        } else if (txtTelefonoCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El teléfono es obligatorio");
+        } else if (txtEstaturaCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "La estatura es obligatoria");
+        } else {
+            
+            String tipo = cbxTipoCliente.getSelectedItem().toString();
+            String documento = txtDocumentoCliente.getText();
+            String nombre = txtNombreCliente.getText();
+            String correo = txtCorreoCliente.getText();
+            String telefono = txtTelefonoCliente.getText();
+            int diaNacimiento = Integer.parseInt(cbxDiaNacimientoCliente.getSelectedItem().toString());
+            int mesNacimiento = Integer.parseInt(cbxMesNacimientoCliente.getSelectedItem().toString());
+            int anioNacimiento = Integer.parseInt(cbxAnioNacimientoCliente.getSelectedItem().toString());
+            double estatura = Double.parseDouble(txtEstaturaCliente.getText());
+            
+            Cliente cliente = banco.crearCliente(tipo, documento, nombre, correo, telefono, diaNacimiento, mesNacimiento, anioNacimiento, estatura);
+            if (cliente != null) {
+                JOptionPane.showMessageDialog(this, "Cliente creado correctamente...");
+                System.out.println(cliente.getDocumento() + " - " + cliente.getNombre());
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al crear el cliente...");
+            }
+        }
+        
     }
 }
