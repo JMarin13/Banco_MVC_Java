@@ -64,6 +64,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnEliminarCliente = new javax.swing.JButton();
         pnlAdminCuentas = new javax.swing.JPanel();
         lblTituloAdminCuentas = new javax.swing.JLabel();
+        cbxTitularCuenta = new javax.swing.JComboBox<>();
+        lblTitularCuenta = new javax.swing.JLabel();
+        pnlTransacciones = new javax.swing.JTabbedPane();
         lblTituloPrincipal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,10 +105,25 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
 
         btnActualizarCliente.setText("Actualizar");
+        btnActualizarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarClienteActionPerformed(evt);
+            }
+        });
 
         btnEliminarCliente.setText("Eliminar");
+        btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlAdminClientesLayout = new javax.swing.GroupLayout(pnlAdminClientes);
         pnlAdminClientes.setLayout(pnlAdminClientesLayout);
@@ -118,9 +136,6 @@ public class frmPrincipal extends javax.swing.JFrame {
                         .addComponent(lblTipoCliente)
                         .addGap(18, 18, 18)
                         .addComponent(cbxTipoCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminClientesLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTituloAdminClientes))
                     .addGroup(pnlAdminClientesLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addGroup(pnlAdminClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -150,7 +165,12 @@ public class frmPrincipal extends javax.swing.JFrame {
                         .addGap(66, 66, 66)
                         .addComponent(lblMesNacimientoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
-                        .addComponent(lblAnioNacimientoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblAnioNacimientoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminClientesLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTituloAdminClientes)
+                        .addGap(95, 95, 95)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(pnlAdminClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnActualizarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -216,24 +236,37 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblTituloAdminCuentas.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         lblTituloAdminCuentas.setText("Administrar Cuentas");
 
+        lblTitularCuenta.setText("Titular");
+
         javax.swing.GroupLayout pnlAdminCuentasLayout = new javax.swing.GroupLayout(pnlAdminCuentas);
         pnlAdminCuentas.setLayout(pnlAdminCuentasLayout);
         pnlAdminCuentasLayout.setHorizontalGroup(
             pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminCuentasLayout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
+            .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
+                .addGap(271, 271, 271)
                 .addComponent(lblTituloAdminCuentas)
-                .addGap(273, 273, 273))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminCuentasLayout.createSequentialGroup()
+                .addContainerGap(169, Short.MAX_VALUE)
+                .addComponent(lblTitularCuenta)
+                .addGap(101, 101, 101)
+                .addComponent(cbxTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(230, 230, 230))
         );
         pnlAdminCuentasLayout.setVerticalGroup(
             pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTituloAdminCuentas)
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
+                .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitularCuenta))
+                .addGap(172, 172, 172))
         );
 
         pnlPrincipal.addTab("Admin Cuentas", pnlAdminCuentas);
+        pnlPrincipal.addTab("Transacciones", pnlTransacciones);
 
         lblTituloPrincipal.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTituloPrincipal.setText("Banco U. Caldas");
@@ -264,6 +297,21 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         crearCliente();
     }//GEN-LAST:event_btnCrearClienteActionPerformed
+
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        // TODO add your handling code here:
+        buscarCliente();
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
+
+    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
+        // TODO add your handling code here:
+        borrarCliente();
+    }//GEN-LAST:event_btnEliminarClienteActionPerformed
+
+    private void btnActualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarClienteActionPerformed
+        // TODO add your handling code here:
+        actualizarCliente();
+    }//GEN-LAST:event_btnActualizarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +357,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxDiaNacimientoCliente;
     private javax.swing.JComboBox<String> cbxMesNacimientoCliente;
     private javax.swing.JComboBox<String> cbxTipoCliente;
+    private javax.swing.JComboBox<String> cbxTitularCuenta;
     private javax.swing.JLabel lblAnioNacimientoCliente;
     private javax.swing.JLabel lblCorreoCliente;
     private javax.swing.JLabel lblDiaNacimientoCliente;
@@ -319,12 +368,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTipoCliente;
+    private javax.swing.JLabel lblTitularCuenta;
     private javax.swing.JLabel lblTituloAdminClientes;
     private javax.swing.JLabel lblTituloAdminCuentas;
     private javax.swing.JLabel lblTituloPrincipal;
     private javax.swing.JPanel pnlAdminClientes;
     private javax.swing.JPanel pnlAdminCuentas;
     private javax.swing.JTabbedPane pnlPrincipal;
+    private javax.swing.JTabbedPane pnlTransacciones;
     private javax.swing.JTextField txtCorreoCliente;
     private javax.swing.JTextField txtDocumentoCliente;
     private javax.swing.JTextField txtEstaturaCliente;
@@ -351,18 +402,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void crearCliente() {
         
-        if (txtDocumentoCliente.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "El documento es obligatorio");
-        } else if (txtNombreCliente.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "El nombre es obligatorio");
-        } else if (txtCorreoCliente.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "El correo es obligatorio");
-        } else if (txtTelefonoCliente.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "El teléfono es obligatorio");
-        } else if (txtEstaturaCliente.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "La estatura es obligatoria");
-        } else {
-            
+        if (validarCamposCliente()) {
             String tipo = cbxTipoCliente.getSelectedItem().toString();
             String documento = txtDocumentoCliente.getText();
             String nombre = txtNombreCliente.getText();
@@ -377,9 +417,105 @@ public class frmPrincipal extends javax.swing.JFrame {
             if (cliente != null) {
                 JOptionPane.showMessageDialog(this, "Cliente creado correctamente...");
                 System.out.println(cliente.getDocumento() + " - " + cliente.getNombre());
+                actualizarListaTitulares();
+                limpiarCamposCliente();
             } else {
-                JOptionPane.showMessageDialog(this, "Error al crear el cliente...");
+                JOptionPane.showMessageDialog(this, "Error al crear el cliente... Puede que ya exista.");
             }
+        }
+        
+    }
+
+    private void buscarCliente() {
+        Cliente cliente = banco.buscarCliente(txtDocumentoCliente.getText());
+        
+        if (cliente != null) {
+            txtNombreCliente.setText(cliente.getNombre());
+            txtCorreoCliente.setText(cliente.getCorreo());
+            txtTelefonoCliente.setText(cliente.getTelefono());
+            txtEstaturaCliente.setText(cliente.getEstatura() + "");
+            cbxTipoCliente.setSelectedItem(cliente.getTipo());
+            cbxDiaNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getDayOfMonth());
+            cbxMesNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getMonthValue());
+            cbxAnioNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getYear());
+        } else {
+            JOptionPane.showMessageDialog(this, "El cliente no existe...");
+        }
+    }
+
+    private void limpiarCamposCliente() {
+        txtDocumentoCliente.setText("");
+        txtNombreCliente.setText("");
+        txtCorreoCliente.setText("");
+        txtTelefonoCliente.setText("");
+        txtEstaturaCliente.setText("");
+        cbxTipoCliente.setSelectedIndex(0);
+        cbxDiaNacimientoCliente.setSelectedIndex(0);
+        cbxMesNacimientoCliente.setSelectedIndex(0);
+        cbxAnioNacimientoCliente.setSelectedIndex(0);
+    }
+
+    private void borrarCliente() {
+        boolean clienteEliminado = banco.borrarCliente(txtDocumentoCliente.getText());
+        
+        if (clienteEliminado) {
+            JOptionPane.showMessageDialog(this, "El cliente ha sido eliminado...");
+            actualizarListaTitulares();
+            limpiarCamposCliente();
+        } else {
+            JOptionPane.showMessageDialog(this, "El cliente no existe...");
+        }
+    }
+
+    private void actualizarCliente() {
+        if (validarCamposCliente()) {
+            String tipo = cbxTipoCliente.getSelectedItem().toString();
+            String documento = txtDocumentoCliente.getText();
+            String nombre = txtNombreCliente.getText();
+            String correo = txtCorreoCliente.getText();
+            String telefono = txtTelefonoCliente.getText();
+            int diaNacimiento = Integer.parseInt(cbxDiaNacimientoCliente.getSelectedItem().toString());
+            int mesNacimiento = Integer.parseInt(cbxMesNacimientoCliente.getSelectedItem().toString());
+            int anioNacimiento = Integer.parseInt(cbxAnioNacimientoCliente.getSelectedItem().toString());
+            double estatura = Double.parseDouble(txtEstaturaCliente.getText());
+            
+            boolean clienteActualizado = banco.actualizarCliente(tipo, documento, nombre, correo, telefono, diaNacimiento, mesNacimiento, anioNacimiento, estatura);
+            if (clienteActualizado) {
+                JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente...");
+                actualizarListaTitulares();
+                limpiarCamposCliente();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al editar el cliente... Puede que no exista.");
+            }
+        }
+    }
+    
+    public boolean validarCamposCliente() {
+        if (txtDocumentoCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El documento es obligatorio");
+            return false;
+        } else if (txtNombreCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El nombre es obligatorio");
+            return false;
+        } else if (txtCorreoCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El correo es obligatorio");
+            return false;
+        } else if (txtTelefonoCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El teléfono es obligatorio");
+            return false;
+        } else if (txtEstaturaCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "La estatura es obligatoria");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void actualizarListaTitulares() {
+        cbxTitularCuenta.removeAllItems();
+        
+        for (Cliente cliente : banco.getBanco().getLstClientes()) {
+            cbxTitularCuenta.addItem(cliente.getNombre());
         }
         
     }
