@@ -7,6 +7,7 @@ package vista;
 import controlador.*;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.*;
 
 /**
@@ -16,6 +17,7 @@ import modelo.*;
 public class frmPrincipal extends javax.swing.JFrame {
     
     ControladorBanco banco;
+    DefaultTableModel dtmCuentas;
 
     /**
      * Creates new form frmPrincipal
@@ -25,6 +27,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         llenarCombos();
         banco = new ControladorBanco();
+        dtmCuentas = new DefaultTableModel(new Object[] {"Número", "Tipo", "Saldo", "Titular"}, 0);
+        tblCuentas.setModel(dtmCuentas);
     }
 
     /**
@@ -66,6 +70,20 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblTituloAdminCuentas = new javax.swing.JLabel();
         cbxTitularCuenta = new javax.swing.JComboBox<>();
         lblTitularCuenta = new javax.swing.JLabel();
+        lblNumeroCuenta = new javax.swing.JLabel();
+        lblTipoCuenta = new javax.swing.JLabel();
+        lblSaldoCuenta = new javax.swing.JLabel();
+        lblClaveCuenta = new javax.swing.JLabel();
+        txtNumeroCuenta = new javax.swing.JTextField();
+        cbxTipoCuenta = new javax.swing.JComboBox<>();
+        txtSaldoCuenta = new javax.swing.JTextField();
+        txtClaveCuenta = new javax.swing.JPasswordField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCuentas = new javax.swing.JTable();
+        btnCrearCuenta = new javax.swing.JButton();
+        btnBuscarCuenta = new javax.swing.JButton();
+        btnActualizarCuenta = new javax.swing.JButton();
+        btnEliminarCuenta = new javax.swing.JButton();
         pnlTransacciones = new javax.swing.JTabbedPane();
         lblTituloPrincipal = new javax.swing.JLabel();
 
@@ -238,31 +256,135 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         lblTitularCuenta.setText("Titular");
 
+        lblNumeroCuenta.setText("Número");
+
+        lblTipoCuenta.setText("Tipo");
+
+        lblSaldoCuenta.setText("Saldo");
+
+        lblClaveCuenta.setText("Clave");
+
+        cbxTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ahorros", "Corriente" }));
+
+        tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblCuentas);
+
+        btnCrearCuenta.setText("Crear");
+        btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCuentaActionPerformed(evt);
+            }
+        });
+
+        btnBuscarCuenta.setText("Buscar");
+        btnBuscarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCuentaActionPerformed(evt);
+            }
+        });
+
+        btnActualizarCuenta.setText("Actualizar");
+        btnActualizarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarCuentaActionPerformed(evt);
+            }
+        });
+
+        btnEliminarCuenta.setText("Eliminar");
+        btnEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCuentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAdminCuentasLayout = new javax.swing.GroupLayout(pnlAdminCuentas);
         pnlAdminCuentas.setLayout(pnlAdminCuentasLayout);
         pnlAdminCuentasLayout.setHorizontalGroup(
             pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
-                .addGap(271, 271, 271)
+                .addGap(265, 265, 265)
                 .addComponent(lblTituloAdminCuentas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminCuentasLayout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
-                .addComponent(lblTitularCuenta)
-                .addGap(101, 101, 101)
-                .addComponent(cbxTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(230, 230, 230))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNumeroCuenta)
+                    .addComponent(lblTipoCuenta)
+                    .addComponent(lblSaldoCuenta)
+                    .addComponent(lblClaveCuenta)
+                    .addComponent(lblTitularCuenta))
+                .addGap(18, 18, 18)
+                .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbxTipoCuenta, 0, 277, Short.MAX_VALUE)
+                    .addComponent(txtNumeroCuenta)
+                    .addComponent(txtSaldoCuenta)
+                    .addComponent(txtClaveCuenta)
+                    .addComponent(cbxTitularCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnActualizarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCrearCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(151, 151, 151))
+            .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminCuentasLayout.createSequentialGroup()
+                    .addContainerGap(98, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(89, Short.MAX_VALUE)))
         );
         pnlAdminCuentasLayout.setVerticalGroup(
             pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTituloAdminCuentas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
+                .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNumeroCuenta)
+                            .addComponent(txtNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipoCuenta)
+                            .addComponent(cbxTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSaldoCuenta)
+                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblClaveCuenta)
+                            .addComponent(txtClaveCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(btnCrearCuenta)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarCuenta)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizarCuenta)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarCuenta)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTitularCuenta))
-                .addGap(172, 172, 172))
+                .addContainerGap(202, Short.MAX_VALUE))
+            .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminCuentasLayout.createSequentialGroup()
+                    .addContainerGap(324, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(15, Short.MAX_VALUE)))
         );
 
         pnlPrincipal.addTab("Admin Cuentas", pnlAdminCuentas);
@@ -313,6 +435,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         actualizarCliente();
     }//GEN-LAST:event_btnActualizarClienteActionPerformed
 
+    private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
+        // TODO add your handling code here:
+        crearCuenta();
+    }//GEN-LAST:event_btnCrearCuentaActionPerformed
+
+    private void btnBuscarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCuentaActionPerformed
+        // TODO add your handling code here:
+        buscarCuenta();
+    }//GEN-LAST:event_btnBuscarCuentaActionPerformed
+
+    private void btnActualizarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCuentaActionPerformed
+        // TODO add your handling code here:
+        actualizarCuenta();
+    }//GEN-LAST:event_btnActualizarCuentaActionPerformed
+
+    private void btnEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCuentaActionPerformed
+        // TODO add your handling code here:
+        borrarCuenta();
+    }//GEN-LAST:event_btnEliminarCuentaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,15 +492,22 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarCliente;
+    private javax.swing.JButton btnActualizarCuenta;
     private javax.swing.JButton btnBuscarCliente;
+    private javax.swing.JButton btnBuscarCuenta;
     private javax.swing.JButton btnCrearCliente;
+    private javax.swing.JButton btnCrearCuenta;
     private javax.swing.JButton btnEliminarCliente;
+    private javax.swing.JButton btnEliminarCuenta;
     private javax.swing.JComboBox<String> cbxAnioNacimientoCliente;
     private javax.swing.JComboBox<String> cbxDiaNacimientoCliente;
     private javax.swing.JComboBox<String> cbxMesNacimientoCliente;
     private javax.swing.JComboBox<String> cbxTipoCliente;
+    private javax.swing.JComboBox<String> cbxTipoCuenta;
     private javax.swing.JComboBox<String> cbxTitularCuenta;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnioNacimientoCliente;
+    private javax.swing.JLabel lblClaveCuenta;
     private javax.swing.JLabel lblCorreoCliente;
     private javax.swing.JLabel lblDiaNacimientoCliente;
     private javax.swing.JLabel lblDocumentoCliente;
@@ -366,8 +515,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblFechaNacimientoCliente;
     private javax.swing.JLabel lblMesNacimientoCliente;
     private javax.swing.JLabel lblNombreCliente;
+    private javax.swing.JLabel lblNumeroCuenta;
+    private javax.swing.JLabel lblSaldoCuenta;
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTipoCliente;
+    private javax.swing.JLabel lblTipoCuenta;
     private javax.swing.JLabel lblTitularCuenta;
     private javax.swing.JLabel lblTituloAdminClientes;
     private javax.swing.JLabel lblTituloAdminCuentas;
@@ -376,10 +528,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAdminCuentas;
     private javax.swing.JTabbedPane pnlPrincipal;
     private javax.swing.JTabbedPane pnlTransacciones;
+    private javax.swing.JTable tblCuentas;
+    private javax.swing.JPasswordField txtClaveCuenta;
     private javax.swing.JTextField txtCorreoCliente;
     private javax.swing.JTextField txtDocumentoCliente;
     private javax.swing.JTextField txtEstaturaCliente;
     private javax.swing.JTextField txtNombreCliente;
+    private javax.swing.JTextField txtNumeroCuenta;
+    private javax.swing.JTextField txtSaldoCuenta;
     private javax.swing.JTextField txtTelefonoCliente;
     // End of variables declaration//GEN-END:variables
 
@@ -518,5 +674,156 @@ public class frmPrincipal extends javax.swing.JFrame {
             cbxTitularCuenta.addItem(cliente.getNombre());
         }
         
+    }
+    
+    private void listarCuentas() {
+        DefaultTableModel modelo = (DefaultTableModel) tblCuentas.getModel();
+        modelo.setRowCount(0);
+
+        for (Cuenta c : banco.listarCuentas()) {
+            modelo.addRow(new Object[]{
+                c.getNumero(),
+                c.getTipo(),
+                c.getSaldo(),
+                c.getTitular().getNombre()
+            });
+        }
+    }
+    
+    private Cliente obtenerTitularSeleccionado() {
+        int indice = cbxTitularCuenta.getSelectedIndex();
+
+        if (indice == -1) {
+            return null;
+        }
+
+        return banco.getBanco().getLstClientes().get(indice);
+    }
+    
+    private boolean validarCamposCuenta() {
+        if (txtNumeroCuenta.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El número de cuenta es obligatorio");
+            return false;
+        }
+
+        if (txtSaldoCuenta.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El saldo es obligatorio");
+            return false;
+        }
+
+        if (txtClaveCuenta.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(this, "La clave es obligatoria");
+            return false;
+        }
+
+        if (cbxTitularCuenta.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un titular");
+            return false;
+        }
+
+        return true;
+    }
+    
+    private void limpiarCamposCuenta() {
+        txtNumeroCuenta.setText("");
+        txtSaldoCuenta.setText("");
+        txtClaveCuenta.setText("");
+        cbxTipoCuenta.setSelectedIndex(0);
+
+        if (cbxTitularCuenta.getItemCount() > 0) {
+            cbxTitularCuenta.setSelectedIndex(0);
+        }
+    }
+    
+    private void crearCuenta() {
+        if (validarCamposCuenta()) {
+            try {
+                int numero = Integer.parseInt(txtNumeroCuenta.getText());
+                String tipo = cbxTipoCuenta.getSelectedItem().toString();
+                double saldo = Double.parseDouble(txtSaldoCuenta.getText());
+                String clave = new String(txtClaveCuenta.getPassword());
+                Cliente titular = obtenerTitularSeleccionado();
+
+                Cuenta nuevaCuenta = banco.crearCuenta(numero, tipo, saldo, clave, titular);
+
+                if (nuevaCuenta != null) {
+                    JOptionPane.showMessageDialog(this, "Cuenta creada correctamente");
+                    listarCuentas();
+                    limpiarCamposCuenta();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cuenta ya existe");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Número o saldo inválido");
+            }
+        }
+    }
+    
+    private void buscarCuenta() {
+        try {
+            int numero = Integer.parseInt(txtNumeroCuenta.getText());
+
+            Cuenta cuentaEncontrada = banco.buscarCuenta(numero);
+
+            if (cuentaEncontrada != null) {
+                cbxTipoCuenta.setSelectedItem(cuentaEncontrada.getTipo());
+                txtSaldoCuenta.setText(cuentaEncontrada.getSaldo() + "");
+                txtClaveCuenta.setText(cuentaEncontrada.getClave());
+
+                int indice = banco.getBanco().getLstClientes().indexOf(cuentaEncontrada.getTitular());
+                cbxTitularCuenta.setSelectedIndex(indice);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "La cuenta no existe");
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número de cuenta válido");
+        }
+    }
+    
+    private void actualizarCuenta() {
+        if (validarCamposCuenta()) {
+            try {
+                int numero = Integer.parseInt(txtNumeroCuenta.getText());
+                String tipo = cbxTipoCuenta.getSelectedItem().toString();
+                double saldo = Double.parseDouble(txtSaldoCuenta.getText());
+                String clave = new String(txtClaveCuenta.getPassword());
+                Cliente titular = obtenerTitularSeleccionado();
+
+                boolean actualizada = banco.actualizarCuenta(numero, tipo, saldo, clave, titular);
+
+                if (actualizada) {
+                    JOptionPane.showMessageDialog(this, "Cuenta actualizada correctamente");
+                    listarCuentas();
+                    limpiarCamposCuenta();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cuenta no existe");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Número o saldo inválido");
+            }
+        }
+    }
+    
+    private void borrarCuenta() {
+        try {
+            int numero = Integer.parseInt(txtNumeroCuenta.getText());
+
+            boolean eliminada = banco.borrarCuenta(numero);
+
+            if (eliminada) {
+                JOptionPane.showMessageDialog(this, "Cuenta eliminada correctamente");
+                listarCuentas();
+                limpiarCamposCuenta();
+            } else {
+                JOptionPane.showMessageDialog(this, "La cuenta no existe");
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número de cuenta válido");
+        }
     }
 }

@@ -5,6 +5,7 @@
 package controlador;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import modelo.*;
 
 /**
@@ -116,5 +117,85 @@ public class ControladorBanco {
             System.out.println("El cliente no existe: " + documento);
             return false;
         }
+    }
+    
+    /*
+    * Nombre del método: CrearCuenta
+    * Parámetros recibidos: Número, Tipo, Saldo, Clave, Titular
+    * Tipo de retorno: Cuenta
+    * Descripción: Crear una nueva Cuenta
+    */
+    public Cuenta crearCuenta(int numero, String tipo, double saldo, String clave, Cliente titular) {
+        if (buscarCuenta(numero) != null) {
+            return null;
+        }
+
+        Cuenta cuenta = new Cuenta(numero, tipo, saldo, clave, titular);
+        banco.getLstCuentas().add(cuenta);
+
+        return cuenta;
+    }
+    
+    /*
+    * Nombre del método: BuscarCuenta
+    * Parámetros recibidos: Número
+    * Tipo de retorno: Cuenta
+    * Descripción: Buscar una cuenta
+    */
+    public Cuenta buscarCuenta(int numero) {
+        for (Cuenta cuenta : banco.getLstCuentas()) {
+            if (cuenta.getNumero() == numero) {
+                return cuenta;
+            }
+        }
+        return null;
+    }
+    
+    /*
+    * Nombre del método: ListarCuentas
+    * Parámetros recibidos: Null
+    * Tipo de retorno: ArrayList<Cuenta>
+    * Descripción: Listar todas las cuentas existentes
+    */
+    public ArrayList<Cuenta> listarCuentas() {
+        return banco.getLstCuentas();
+    }
+    
+    /*
+    * Nombre del método: ActualizarCuenta
+    * Parámetros recibidos: Numero, nuevoTipo, nuevoSaldo, nuevaClave, nuevoTitular
+    * Tipo de retorno: boolean
+    * Descripción: Editar la información una Cuenta
+    */
+    public boolean actualizarCuenta(int numero, String nuevoTipo, double nuevoSaldo, String nuevaClave, Cliente nuevoTitular) {
+        Cuenta cuenta = buscarCuenta(numero);
+
+        if (cuenta == null) {
+            return false;
+        }
+
+        cuenta.setTipo(nuevoTipo);
+        cuenta.setSaldo(nuevoSaldo);
+        cuenta.setClave(nuevaClave);
+        cuenta.setTitular(nuevoTitular);
+
+        return true;
+    }
+    
+    /*
+    * Nombre del método: BorrarCuenta
+    * Parámetros recibidos: Número
+    * Tipo de retorno: boolean
+    * Descripción: Borrar una cuenta
+    */
+    public boolean borrarCuenta(int numero) {
+        Cuenta cuenta = buscarCuenta(numero);
+
+        if (cuenta == null) {
+            return false;
+        }
+
+        banco.getLstCuentas().remove(cuenta);
+        return true;
     }
 }
