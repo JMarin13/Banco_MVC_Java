@@ -17,6 +17,7 @@ import modelo.*;
 public class frmPrincipal extends javax.swing.JFrame {
     
     ControladorBanco banco;
+    ControladorCuenta cuenta;
     DefaultTableModel dtmCuentas;
 
     /**
@@ -27,6 +28,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         llenarCombos();
         banco = new ControladorBanco();
+        cuenta = new ControladorCuenta();
         dtmCuentas = new DefaultTableModel(new Object[] {"Número", "Tipo", "Saldo", "Titular"}, 0);
         tblCuentas.setModel(dtmCuentas);
     }
@@ -84,7 +86,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnBuscarCuenta = new javax.swing.JButton();
         btnActualizarCuenta = new javax.swing.JButton();
         btnEliminarCuenta = new javax.swing.JButton();
-        pnlTransacciones = new javax.swing.JTabbedPane();
+        pnlTransacciones = new javax.swing.JPanel();
+        lblTituloTransaccion = new javax.swing.JLabel();
+        lblNumeroCuentaTransaccion = new javax.swing.JLabel();
+        lblCantidadTransaccion = new javax.swing.JLabel();
+        txtNumeroCuentaTransaccion = new javax.swing.JTextField();
+        txtCantidadTransaccion = new javax.swing.JTextField();
+        btnConsignar = new javax.swing.JButton();
+        btnRetirar = new javax.swing.JButton();
         lblTituloPrincipal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -363,7 +372,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                             .addComponent(lblSaldoCuenta)
                             .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlAdminCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblClaveCuenta)
                             .addComponent(txtClaveCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlAdminCuentasLayout.createSequentialGroup()
@@ -388,6 +397,75 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
 
         pnlPrincipal.addTab("Admin Cuentas", pnlAdminCuentas);
+
+        lblTituloTransaccion.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        lblTituloTransaccion.setText("Realizar Transacción");
+
+        lblNumeroCuentaTransaccion.setText("Número de Cuenta");
+
+        lblCantidadTransaccion.setText("Cantidad");
+
+        btnConsignar.setText("Consignar");
+        btnConsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsignarActionPerformed(evt);
+            }
+        });
+
+        btnRetirar.setText("Retirar");
+        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetirarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlTransaccionesLayout = new javax.swing.GroupLayout(pnlTransacciones);
+        pnlTransacciones.setLayout(pnlTransaccionesLayout);
+        pnlTransaccionesLayout.setHorizontalGroup(
+            pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTransaccionesLayout.createSequentialGroup()
+                .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTransaccionesLayout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(lblTituloTransaccion))
+                    .addGroup(pnlTransaccionesLayout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCantidadTransaccion)
+                            .addComponent(lblNumeroCuentaTransaccion))
+                        .addGap(27, 27, 27)
+                        .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlTransaccionesLayout.createSequentialGroup()
+                                .addComponent(btnConsignar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                                .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNumeroCuentaTransaccion)
+                                .addComponent(txtCantidadTransaccion, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)))))
+                .addContainerGap(294, Short.MAX_VALUE))
+        );
+        pnlTransaccionesLayout.setVerticalGroup(
+            pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTransaccionesLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlTransaccionesLayout.createSequentialGroup()
+                        .addComponent(lblTituloTransaccion)
+                        .addGap(73, 73, 73))
+                    .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNumeroCuentaTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNumeroCuentaTransaccion)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCantidadTransaccion)
+                    .addComponent(txtCantidadTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(pnlTransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConsignar)
+                    .addComponent(btnRetirar))
+                .addContainerGap(239, Short.MAX_VALUE))
+        );
+
         pnlPrincipal.addTab("Transacciones", pnlTransacciones);
 
         lblTituloPrincipal.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -455,6 +533,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         borrarCuenta();
     }//GEN-LAST:event_btnEliminarCuentaActionPerformed
 
+    private void btnConsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsignarActionPerformed
+        // TODO add your handling code here:
+        consignarDinero();
+    }//GEN-LAST:event_btnConsignarActionPerformed
+
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        // TODO add your handling code here:
+        retirarDinero();
+    }//GEN-LAST:event_btnRetirarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -495,10 +583,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizarCuenta;
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnBuscarCuenta;
+    private javax.swing.JButton btnConsignar;
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnCrearCuenta;
     private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JButton btnEliminarCuenta;
+    private javax.swing.JButton btnRetirar;
     private javax.swing.JComboBox<String> cbxAnioNacimientoCliente;
     private javax.swing.JComboBox<String> cbxDiaNacimientoCliente;
     private javax.swing.JComboBox<String> cbxMesNacimientoCliente;
@@ -507,6 +597,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxTitularCuenta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnioNacimientoCliente;
+    private javax.swing.JLabel lblCantidadTransaccion;
     private javax.swing.JLabel lblClaveCuenta;
     private javax.swing.JLabel lblCorreoCliente;
     private javax.swing.JLabel lblDiaNacimientoCliente;
@@ -516,6 +607,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblMesNacimientoCliente;
     private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblNumeroCuenta;
+    private javax.swing.JLabel lblNumeroCuentaTransaccion;
     private javax.swing.JLabel lblSaldoCuenta;
     private javax.swing.JLabel lblTelefonoCliente;
     private javax.swing.JLabel lblTipoCliente;
@@ -524,17 +616,20 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTituloAdminClientes;
     private javax.swing.JLabel lblTituloAdminCuentas;
     private javax.swing.JLabel lblTituloPrincipal;
+    private javax.swing.JLabel lblTituloTransaccion;
     private javax.swing.JPanel pnlAdminClientes;
     private javax.swing.JPanel pnlAdminCuentas;
     private javax.swing.JTabbedPane pnlPrincipal;
-    private javax.swing.JTabbedPane pnlTransacciones;
+    private javax.swing.JPanel pnlTransacciones;
     private javax.swing.JTable tblCuentas;
+    private javax.swing.JTextField txtCantidadTransaccion;
     private javax.swing.JPasswordField txtClaveCuenta;
     private javax.swing.JTextField txtCorreoCliente;
     private javax.swing.JTextField txtDocumentoCliente;
     private javax.swing.JTextField txtEstaturaCliente;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNumeroCuenta;
+    private javax.swing.JTextField txtNumeroCuentaTransaccion;
     private javax.swing.JTextField txtSaldoCuenta;
     private javax.swing.JTextField txtTelefonoCliente;
     // End of variables declaration//GEN-END:variables
@@ -824,6 +919,70 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Ingrese un número de cuenta válido");
+        }
+    }
+
+    private void consignarDinero() {
+        if (validarCamposTransaccion()) {
+            try {
+                int numero = Integer.parseInt(txtNumeroCuentaTransaccion.getText());
+                double cantidad = Double.parseDouble(txtCantidadTransaccion.getText());
+
+                boolean consignado = banco.consignarDinero(numero, cantidad);
+
+                if (consignado) {
+                    JOptionPane.showMessageDialog(this, "Transacción realizada correctamente");
+                    listarCuentas();
+                    limpiarCamposTransaccion();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cuenta no existe");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Ocurrió algún error al realizar la transacción");
+            }
+        }
+    }
+    
+    private boolean validarCamposTransaccion() {
+        if (txtNumeroCuentaTransaccion.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "El número de cuenta es obligatorio");
+            return false;
+        }
+
+        if (txtCantidadTransaccion.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "La cantidad es obligatoria");
+            return false;
+        }
+
+        return true;
+    }
+    
+    private void limpiarCamposTransaccion() {
+        txtNumeroCuentaTransaccion.setText("");
+        txtCantidadTransaccion.setText("");
+        
+    }
+
+    private void retirarDinero() {
+        if (validarCamposTransaccion()) {
+            try {
+                int numero = Integer.parseInt(txtNumeroCuentaTransaccion.getText());
+                double cantidad = Double.parseDouble(txtCantidadTransaccion.getText());
+
+                boolean retirado = banco.retirarDinero(numero, cantidad);
+
+                if (retirado) {
+                    JOptionPane.showMessageDialog(this, "Transacción realizada correctamente");
+                    listarCuentas();
+                    limpiarCamposTransaccion();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cuenta no existe o los fondos son insuficientes");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Ocurrió algún error al realizar la transacción");
+            }
         }
     }
 }

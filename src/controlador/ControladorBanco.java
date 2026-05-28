@@ -198,4 +198,27 @@ public class ControladorBanco {
         banco.getLstCuentas().remove(cuenta);
         return true;
     }
+    
+    public boolean consignarDinero(int numero, double cantidad) {
+        
+        Cuenta cuenta = buscarCuenta(numero);
+        
+        if (cuenta == null) {
+            return false;
+        }
+        
+        cuenta.setSaldo(cantidad + cuenta.getSaldo());
+        return true;
+    }
+    
+    public boolean retirarDinero(int numero, double cantidad) {
+        Cuenta cuenta = buscarCuenta(numero);
+        
+        if (cuenta == null || cuenta.getSaldo() < cantidad) {
+            return false;
+        }
+        
+        cuenta.setSaldo(cuenta.getSaldo() - cantidad);
+        return true;
+    }
 }
