@@ -686,9 +686,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             txtTelefonoCliente.setText(cliente.getTelefono());
             txtEstaturaCliente.setText(cliente.getEstatura() + "");
             cbxTipoCliente.setSelectedItem(cliente.getTipo());
-            cbxDiaNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getDayOfMonth());
-            cbxMesNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getMonthValue());
-            cbxAnioNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getYear());
+            cbxDiaNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getDayOfMonth() + "");
+            cbxMesNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getMonthValue() + "");
+            cbxAnioNacimientoCliente.setSelectedItem(cliente.getFechaNacimiento().getYear() + "");
         } else {
             JOptionPane.showMessageDialog(this, "El cliente no existe...");
         }
