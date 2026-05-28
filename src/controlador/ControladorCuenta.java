@@ -5,7 +5,6 @@
 package controlador;
 
 import modelo.Banco;
-import modelo.Cliente;
 import modelo.Cuenta;
 
 /**
@@ -14,16 +13,22 @@ import modelo.Cuenta;
  */
 public class ControladorCuenta {
     
-    private ControladorBanco banco;
+    private Banco banco;
 
-    public ControladorCuenta() {
-        
+    public ControladorCuenta(Banco banco) {
+        this.banco = banco;
     }
     
-    public ControladorBanco getBanco() {
+    public Banco getBanco() {
         return banco;
     }
     
+    /*
+    * Nombre del método: consignarDinero
+    * Parámetros recibidos: Número, Cantidad
+    * Tipo de retorno: boolean
+    * Descripción: Consignar dinero a una cuenta
+    */
     public boolean consignarDinero(int numero, double cantidad) {
         
         Cuenta cuenta = buscarCuenta(numero);
@@ -36,6 +41,12 @@ public class ControladorCuenta {
         return true;
     }
     
+    /*
+    * Nombre del método: retirarDinero
+    * Parámetros recibidos: Número, Cantidad
+    * Tipo de retorno: boolean
+    * Descripción: Retirar dinero de una cuenta
+    */
     public boolean retirarDinero(int numero, double cantidad) {
         Cuenta cuenta = buscarCuenta(numero);
         
@@ -54,7 +65,7 @@ public class ControladorCuenta {
     * Descripción: Buscar una cuenta
     */
     public Cuenta buscarCuenta(int numero) {
-        for (Cuenta cuenta : getBanco().getBanco().getLstCuentas()) {
+        for (Cuenta cuenta : banco.getLstCuentas()) {
             if (cuenta.getNumero() == numero) {
                 return cuenta;
             }

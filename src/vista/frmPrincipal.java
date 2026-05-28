@@ -28,7 +28,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         llenarCombos();
         banco = new ControladorBanco();
-        cuenta = new ControladorCuenta();
+        cuenta = new ControladorCuenta(banco.getBanco());
         dtmCuentas = new DefaultTableModel(new Object[] {"Número", "Tipo", "Saldo", "Titular"}, 0);
         tblCuentas.setModel(dtmCuentas);
     }
@@ -928,7 +928,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 int numero = Integer.parseInt(txtNumeroCuentaTransaccion.getText());
                 double cantidad = Double.parseDouble(txtCantidadTransaccion.getText());
 
-                boolean consignado = banco.consignarDinero(numero, cantidad);
+                boolean consignado = cuenta.consignarDinero(numero, cantidad);
 
                 if (consignado) {
                     JOptionPane.showMessageDialog(this, "Transacción realizada correctamente");
@@ -970,7 +970,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 int numero = Integer.parseInt(txtNumeroCuentaTransaccion.getText());
                 double cantidad = Double.parseDouble(txtCantidadTransaccion.getText());
 
-                boolean retirado = banco.retirarDinero(numero, cantidad);
+                boolean retirado = cuenta.retirarDinero(numero, cantidad);
 
                 if (retirado) {
                     JOptionPane.showMessageDialog(this, "Transacción realizada correctamente");
